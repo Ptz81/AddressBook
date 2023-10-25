@@ -8,9 +8,9 @@ export const getIsLoading = state => state.table.isLoading;
 export const filteredContacts = createSelector(
   [getContacts, getFilter],
   (contacts, filter) => {
-    // if (!Array.isArray(contacts)) {
-    //   return [];
-    // }
+    if (!Array.isArray(contacts)) {
+      return [];
+    }
     return contacts.filter(({ name }) =>
       name.toLowerCase().includes(filter.toLowerCase())
     );
