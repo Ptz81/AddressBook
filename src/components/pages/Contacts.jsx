@@ -15,6 +15,13 @@ export default function Contacts() {
   return (
     <>
       <ContactPage>
+          <div>
+      <Helmet>
+        <title>Your Contacts filter</title>
+      </Helmet>
+      <div>{isLoading && <Loader/>}</div>
+      <Filter />
+      </div>
         <Helmet>
         <title>Your Contacts</title>
       </Helmet>
@@ -24,18 +31,8 @@ export default function Contacts() {
          <div>
       <ContactList />
         </div>
-        <div>
-      <Helmet>
-        <title>Your Contacts filter</title>
-      </Helmet>
-      <div>{isLoading && <Loader/>}</div>
-      <Filter />
-      </div>
       </ContactContainer>
 </ContactPage>
-
-
-
     </>
   );
 }

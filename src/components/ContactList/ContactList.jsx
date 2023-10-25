@@ -7,51 +7,7 @@ import {
   getError,
   getIsLoading,
 } from "../../redux/contacts/selectors.js";
-import styled from 'styled-components';
-
-// const List = styled.ul`
-//   padding: 0;
-//   margin: 0;
-//   list-style: none;
-//   display: grid;
-//   grid-template-columns: 1fr;
-//   grid-gap: 2px;
-
-//   @media screen and (max-width: 560px) {
-//     margin-bottom: 30px;
-//   }
-// `;
-
-// const Contact = styled.p`
-//   font-size: 16px;
-//   text-transform: uppercase;
-//   font-weight: 500;
-//   color: rgba(83, 32, 107, 0.815);
-// `;
-
-const Button = styled.button`
-  border: none;
-  font: inherit;
-  cursor: pointer;
-  outline: none;
-  margin-right: auto;
-  border-radius: 4px;
-  padding: 6px 10px;
-  border: 1px solid #3f41b5;
-  background-color: #fff;
-  color: #3f41b5;
-
-  &:hover,
-  &:focus {
-    background-color: #3f51b5;
-    color: #fff;
-    border: 1px solid #3f41b5;
-  }
-
-  &:active {
-    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.15);
-  }
-`;
+import { ButtonTable, Table, TableBody, TableData, TableHeader, Thead } from "./ContactList.styled.js";
 
 const ContactList = () => {
   const contactItems = useSelector(filteredContacts);
@@ -76,30 +32,30 @@ const ContactList = () => {
   }
 
   return (
-    <table>
-      <thead>
+    <Table>
+      <Thead>
         <tr>
-          <th>Name</th>
-          <th>Email</th>
-          <th>Birthday</th>
-          <th>Phone Number</th>
-          <th>Action</th>
+          <TableHeader>Name</TableHeader>
+          <TableHeader>Email</TableHeader>
+          <TableHeader>Birthday</TableHeader>
+          <TableHeader>Phone Number</TableHeader>
+          <TableHeader>Action</TableHeader>
         </tr>
-      </thead>
-      <tbody>
-        {contactItems.map((contact) => (
-          <tr key={contact.id}>
-            <td>{contact.name}</td>
-            <td>{contact.email}</td>
-            <td>{contact.birthday_date}</td>
-            <td>{contact.phone_number}</td>
-            <td>
-              <Button onClick={() => dispatch(deleteContacts(contact.id))}>Delete</Button>
-            </td>
+      </Thead>
+      <TableBody>
+        {contactItems.map((table) => (
+          <tr key={table.id}>
+            <TableData>{table.name}</TableData>
+            <TableData>{table.email}</TableData>
+            <TableData>{table.birthday_date}</TableData>
+            <TableData>{table.phone_number}</TableData>
+            <TableData>
+              <ButtonTable onClick={() => dispatch(deleteContacts(table.id))}>Delete</ButtonTable>
+            </TableData>
           </tr>
         ))}
-      </tbody>
-    </table>
+      </TableBody>
+    </Table>
   );
 };
 export default ContactList;

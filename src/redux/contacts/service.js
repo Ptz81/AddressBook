@@ -14,9 +14,10 @@ export const handleFulfilled = (state) => {
   state.error = ''
 }
 export const handleFulfilledGet = (state, action) => {
-     console.log(action.payload)
-      state.items = action.payload
-    }
+  const results = action.payload.results;
+  state.items = results;
+  
+}
   export const handleFulfilledCreate = (state, action) => {
       state.items.push(action.payload)
         }
