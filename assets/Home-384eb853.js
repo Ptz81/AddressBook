@@ -1,1 +1,0 @@
-import{j as o}from"./index-29e65c4e.js";import{C as e,T as r}from"./pages.styled-321cdc30.js";function m(){return o.jsx(e,{children:o.jsx(r,{children:"Welcome to Address Book!"})})}export{m as default};
