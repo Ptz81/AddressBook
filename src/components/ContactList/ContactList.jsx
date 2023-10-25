@@ -72,7 +72,7 @@ const ContactList = () => {
   }
 
   if (!contactItems || contactItems.length === 0) {
-    return <p>No contacts found.</p>;
+    return;
   }
 
   return (
