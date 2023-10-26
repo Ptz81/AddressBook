@@ -51,12 +51,23 @@ export const ContactForm = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     const name = e.currentTarget.elements.name.value;
-    const number = e.currentTarget.elements.number.value;
+    const numberInput = e.currentTarget.elements.number;
+    const numberValue = numberInput.value;
+const validNumber = /^(\+\d{3,}[-.\s]?(\(\d{1,3}\))?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9})$/.test(numberValue);
+    const email = e.currentTarget.elements.email.value;
+    const birthday = e.currentTarget.elements.birthday.value;
+
+    if (!validNumber) {
+      alert('Invalid phone number. Please enter a valid phone number in format:+xxxxxxxxx');
+      return;
+    }
+
     if (contacts.some((contact) => contact.name.toLowerCase() === name.toLowerCase())) {
       alert(`${name} is already in contacts`);
       return;
     }
-    dispatch(createContacts({ name, number }));
+
+    dispatch(createContacts({ name, number: numberValue, email, birthday }));
     e.currentTarget.reset();
   };
 
@@ -69,6 +80,7 @@ export const ContactForm = () => {
         type="text"
         name="name"
         id="name"
+        placeholder='Name'
         pattern="^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$"
         title="Name may contain only letters, apostrophe, dash and spaces. For example Adrian, Jacob Mercer, Charles de Batz de Castelmore d'Artagnan"
         required
@@ -79,10 +91,33 @@ export const ContactForm = () => {
       <Input
         type="tel"
         name="number"
+        placeholder='Phone number +xxxxxxxxx'
         id="number"
-        pattern="\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}"
+        pattern="(\+\d{1,4}[-.\s]?(\(\d{1,3}\))[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9})"
         title="Phone number must be digits and can contain spaces, dashes, parentheses and can start with +"
         required
+      />
+      <label htmlFor="email">
+        Email
+      </label>
+      <Input
+        type="email"
+        name="email"
+        placeholder='Email'
+        id="email"
+        pattern="^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$"
+        title="Please check the email"
+        required
+      />
+      <label htmlFor="birthday">
+        Date of Birth
+      </label>
+      <Input
+        type="date"
+        name="birthday"
+        id="birthday"
+        title="Please enter number, month and year"
+        required 
       />
       <Button type="submit">Add contact</Button>
     </Form>

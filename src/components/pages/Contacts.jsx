@@ -1,7 +1,7 @@
 import { useSelector } from 'react-redux';
 import { Helmet } from 'react-helmet';
 import { getIsLoading } from '../../redux/contacts/selectors.js';
-import { ContactForm } from '../ContactForm/ContactForm.jsx';
+// import { ContactForm } from '../ContactForm/ContactForm.jsx';
 import ContactList from '../ContactList/ContactList.jsx';
 import Filter from '../Filter/Filter.jsx';
 import Loader from '../Loader/Loader.jsx';
@@ -25,7 +25,7 @@ export default function Contacts() {
         <Helmet>
         <title>Your Contacts</title>
       </Helmet>
-        <ContactForm />
+        {/* <ContactForm /> */}
         <div>{isLoading && <Loader/>}</div>
          <ContactContainer>
          <div>
