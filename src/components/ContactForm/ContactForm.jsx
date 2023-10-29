@@ -1,5 +1,5 @@
 import { useDispatch, useSelector } from 'react-redux';
-import { createContacts } from '../../redux/contacts/api.js';
+import { createContacts, fetchContacts } from '../../redux/contacts/api.js';
 import { getContacts } from '../../redux/contacts/selectors.js';
 import styled from 'styled-components';
 
@@ -51,9 +51,8 @@ export const ContactForm = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     const name = e.currentTarget.elements.name.value;
-    const numberInput = e.currentTarget.elements.number;
-    const numberValue = numberInput.value;
-const validNumber = /^(\+\d{3,}[-.\s]?(\(\d{1,3}\))?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9})$/.test(numberValue);
+    const number = e.currentTarget.elements.phone.value;
+    const validNumber = /^(\+\d{3,}[-.\s]?(\(\d{1,3}\))?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9})$/.test(number);
     const email = e.currentTarget.elements.email.value;
     const birthday = e.currentTarget.elements.birthday.value;
 
@@ -67,10 +66,13 @@ const validNumber = /^(\+\d{3,}[-.\s]?(\(\d{1,3}\))?[-.\s]?\d{1,4}[-.\s]?\d{1,4}
       return;
     }
 
-    dispatch(createContacts({ name, number: numberValue, email, birthday }));
-    e.currentTarget.reset();
+      dispatch(createContacts({ name, phone: number, email, birthday }))
+      .then(() => {
+        e.currentTarget.reset(); 
+        dispatch(fetchContacts()); 
+      });
   };
-
+  
   return (
     <Form onSubmit={handleSubmit} autoComplete="off">
       <label htmlFor="name">
@@ -85,14 +87,14 @@ const validNumber = /^(\+\d{3,}[-.\s]?(\(\d{1,3}\))?[-.\s]?\d{1,4}[-.\s]?\d{1,4}
         title="Name may contain only letters, apostrophe, dash and spaces. For example Adrian, Jacob Mercer, Charles de Batz de Castelmore d'Artagnan"
         required
       />
-      <label htmlFor="number">
+      <label htmlFor="phone">
         Number
       </label>
       <Input
         type="tel"
-        name="number"
+        name="phone"
         placeholder='Phone number +xxxxxxxxx'
-        id="number"
+        id="phone"
         pattern="(\+\d{1,4}[-.\s]?(\(\d{1,3}\))[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9})"
         title="Phone number must be digits and can contain spaces, dashes, parentheses and can start with +"
         required

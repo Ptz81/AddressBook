@@ -15,6 +15,29 @@ const ContactList = () => {
   const isLoading = useSelector(getIsLoading);
   const dispatch = useDispatch();
 
+  // const [name, setName] = useState("");
+  // const [email, setEmail] = useState("");
+  // const [date, setDate] = useState("");
+  // const [phone_number, setPhoneNumber] = useState("");
+
+
+  // const handleNameChange = (event) => {
+  //   setName(event.target.value);
+  // };
+
+  // const handleEmailChange = (event) => {
+  //   setEmail(event.target.value);
+  // };
+
+  // const handleDateChange = (event) => {
+  //   setDate(event.target.value);
+  // };
+
+
+  // const handlePhoneNumberChange = (event) => {
+  //   setPhoneNumber(event.target.value);
+  // };
+
   useEffect(() => {
     dispatch(fetchContacts());
   }, [dispatch]);
@@ -31,6 +54,7 @@ const ContactList = () => {
     return;
   }
 
+
   return (
     <Table>
       <Thead>
@@ -39,7 +63,7 @@ const ContactList = () => {
           <TableHeader>Email</TableHeader>
           <TableHeader>Birthday</TableHeader>
           <TableHeader>Phone Number</TableHeader>
-          <TableHeader>Action</TableHeader>
+          {/* <TableHeader>Action</TableHeader> */}
         </tr>
       </Thead>
       <TableBody>
@@ -50,7 +74,8 @@ const ContactList = () => {
             <TableData>{table.birthday_date}</TableData>
             <TableData>{table.phone_number}</TableData>
             <TableData>
-              <ButtonTable onClick={() => dispatch(deleteContacts(table.id))}>Delete</ButtonTable>
+              {/* <ButtonTable onClick={() => dispatch(correctContact(table.id, {name, email, date, phone_number}))}>Correct</ButtonTable> */}
+              {/* <ButtonTable onClick={() => dispatch(deleteContacts(table.id))}>Delete</ButtonTable> */}
             </TableData>
           </tr>
         ))}
